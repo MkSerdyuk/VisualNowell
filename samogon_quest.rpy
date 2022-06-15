@@ -1,4 +1,4 @@
-label Дом1:
+label Гараж1:
     $ flags.append('Самогон')
     show mitya sits
     define mitya = Character("Митя", color="ffffff")
@@ -211,6 +211,8 @@ label samogonPrep:
     mitya ""
 
     hide bg laba ingr
+
+    return
 
 
 
