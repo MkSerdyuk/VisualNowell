@@ -1,38 +1,26 @@
 init python:
-    def rate:
-        pass
+
+    amount = 0
+    quality = 5
+    #идеальный порядок ингридиентов
+    order = ['Табуретка','Сахар','Кипяток','Дрожжи']
 
     def ingr_dragged(drags, drop):
-
+        global amount, quality, order
         if not drop:
             return
-
-        store.detective = drags[0].drag_name
-        store.city = drop.drag_name
-
-        if not all_dropped:
+        amount += 1
+        drags[0].draggable = False
+        drop.draggable = False
+        if drags[0].drag_name != order[amount - 1]:
+            quality -= 1 
+        #renpy.hide(drags[0])     
+        if amount < 4:
             return
-        else:
-            rate
-
         return True
-
-    def plate_dragged(drags, drop):
-        pass
-
-    def plate_dropped(drops, drag):
-        pass
-
-    def bottle_dropped(drops, drag):
-        pass
-
-
-
 
 screen cookAlco:
     add "table.jpg"
-    $ all_dropped = False
-    $ quality = 0
 
     draggroup:
 
@@ -41,42 +29,30 @@ screen cookAlco:
             child "ingr1.png"
             droppable False
             dragged ingr_dragged
-            xpos 100 ypos 100
+            xpos 0 ypos 0
         drag:
             drag_name "Дрожжи"
             child "ingr2.png"
             droppable False
             dragged ingr_dragged
-            xpos 150 ypos 100
+            xpos 600 ypos 0
         drag:
             drag_name "Сахар"
             child "ingr3.png"
             droppable False
             dragged ingr_dragged
-            xpos 200 ypos 100
+            xpos 0 ypos 600
         drag:
             drag_name "Кипяток"
-            child "ingr3.png"
+            child "ingr4.png"
             droppable False
             dragged ingr_dragged
-            xpos 250 ypos 100
+            xpos 400 ypos 600
 
-
-        drag:
-            drag_name "Терка"
-            child "grater.png"
-            draggable False
-            xpos 450 ypos 140
         drag:
             drag_name "Миска"
             child "plate.png"
-            dragged plate_dragged
-            dropped plate_dropped
-            xpos 500 ypos 280
-        drag:
-            drag_name "Банка"
-            draggable False
-            dropped bottle_dropped
-            child "bottle.png"
-            xpos 550 ypos 420
+            #draggable False
+            xpos 1200 ypos 0
+
 

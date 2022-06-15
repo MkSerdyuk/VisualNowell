@@ -1,7 +1,6 @@
 label Гараж1:
     $ flags.append('Самогон')
     show mitya sits
-    define mitya = Character("Митя", color="ffffff")
     $ reputation['Митя'] = 0
     mitya "Сегодня мы будем гнать самогон"
     mitya "Чтобы получить качетсвенный продукт нужно приложить много труда"
@@ -23,7 +22,6 @@ label gym1:
     show taisia warrior
     taisia "Хочешь заиметь право на пососать член?"
     menu:
-        "Хочешь заиметь право на пососать член?"
         "Нет, спасибо":
             "Жаль, раньше у тебя хорошо получалось"
             jump gymInside
@@ -40,7 +38,6 @@ label gym1:
 label fight:
     show taisia warrior at right
     show van
-    define van = Character('Иван Даркохльмов-Спайд', color = "f0f0f0")
     van "Кто дерется в моем gym?"
     hide taisia warrior
     jump suction
@@ -80,8 +77,6 @@ label gymInside:
             hide bg bania room
             jump getShugar
            
-
-
     return
 
 label getShugar:
@@ -206,12 +201,31 @@ label samogonPrep:
     show bg laba ingr
     "Мы отнесли все ингридиенты"
     show mitya
+    mitya "Ну что, ты готов делать брагу?"
+    menu:
+        "Да":
+            pass
+        "Мне надо еще раз прочитать рецепт" if 'Книга' in lagguage:
+            show book
+            pause
+            hide book
+
     mitya "Приступим"
     mitya "Главное соблюдать рецепт"
-    mitya ""
-
+    call screen cookAlco
+    if quality == 5:
+        mitya "Ты приготовил идеальную брагу, молодец"
+        $ intellect += 3
+        $ reputation['Митя'] += 3
+        $ badCompRep += 3
+    elif quality >= 3:
+        mitya "Неплохо, но ты допустил ошибки"
+        $ intellect += 1
+    else:
+        mitya "Отвратительно, это невозможно пить"
+        $ reputation['Митя'] -= 3
+    hide mitya
     hide bg laba ingr
-
     return
 
 
