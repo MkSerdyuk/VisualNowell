@@ -242,9 +242,6 @@ label preparation:
         "Консервы":
             $ lagguage.append('Консервы')  
 
-        "Презервативы":
-            $ lagguage.append('Презервативы')
-
         "Виниловую пластинку":
             $ lagguage.append('Пластинка')  
             $ musCompRep += 1
